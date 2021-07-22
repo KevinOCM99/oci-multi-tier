@@ -9,7 +9,7 @@ data "oci_core_images" "OLImage" {
   compartment_id           = "${var.compartment_ocid}"
   shape                    = "${var.instance_shape}"
   operating_system         = "Oracle Linux"
-  operating_system_version = "7.6"
+  operating_system_version = "7.9"
 }
 
 resource "oci_core_instance" "instance" {
@@ -34,7 +34,7 @@ resource "oci_core_instance" "instance" {
     hostname_label   = "${local.hostname_prefix}${count.index}"
   }
 
-  metadata {
+  metadata = {
     ssh_authorized_keys = "${local.ssh_public_key}"
     user_data           = "${base64encode(data.template_file.userdata.*.rendered[count.index])}"
   }
@@ -43,7 +43,7 @@ resource "oci_core_instance" "instance" {
 resource "null_resource" "waiter" {
   count = "${var.ssh_private_key_path == "" ? 0 : var.nodes_count + var.arbiters_count}"
 
-  triggers {
+  triggers = {
     instance_ids = "${oci_core_instance.instance.*.id[count.index]}"
   }
 
@@ -70,7 +70,7 @@ data "template_file" "userdata" {
 
   template = "${file(local.bootstrap_file)}"
 
-  vars {
+  vars = {
     bundle_tgz_uri = "${local.bundle_tgz_uri}"
 
     custom_userdata = "${var.custom_userdata}"

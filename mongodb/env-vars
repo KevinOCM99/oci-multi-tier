@@ -1,15 +1,17 @@
 ### Authentication details
-export TF_VAR_tenancy_ocid="<tenancy OCID>"
-export TF_VAR_user_ocid="<user OCID>"
-export TF_VAR_fingerprint="<PEM key fingerprint>"
-export TF_VAR_private_key_path="<path to the private key that matches the fingerprint above>"
+export TF_VAR_tenancy_ocid="ocid1.tenancy.oc1..aaaaaaaaro7aox2fclu4urtpgsbacnrmjv46e7n4fw3sc2wbq24l7dzf3kba"
+export TF_VAR_user_ocid="ocid1.user.oc1..aaaaaaaachwme34sx6rt4opg7pp6ss6fuu7rbz35hqiumkdwc2lvg67y2y3q"
+export TF_VAR_fingerprint="37:f7:d3:46:b1:c4:e2:e3:68:65:a0:45:e1:2a:25:74"
+export TF_VAR_private_key_path=~/.oci/bmcs_api_key.pem
 
 ### Region
-export TF_VAR_region="<region in which to operate, example: us-ashburn-1, us-phoenix-1>"
+export TF_VAR_region="ap-chuncheon-1"
 
 ### Compartment
-export TF_VAR_compartment_ocid="<compartment OCID>"
+export TF_VAR_compartment_ocid="ocid1.compartment.oc1..aaaaaaaahr7aicqtodxmcfor6pbqn3hvsngpftozyxzqw36gj4kh3w3kkj4q"
 
 ### Public/private keys used on the instances
-export TF_VAR_ssh_public_key_path="<path to public key>"
-export TF_VAR_ssh_private_key_path="<path to private key>"
+export TF_VAR_ssh_public_key_path="/root/.ssh/id_rsa.pub"
+export TF_VAR_ssh_private_key_path="/root/.ssh/id_rsa"
+
+

@@ -53,7 +53,7 @@ variable "nodes_count" {
 
 variable "instance_shape" {
   description = "Size of each instance. (Minimum recommended: VM.Standard1.1)."
-  default     = "VM.Standard1.1"
+  default     = "VM.Standard2.1"
 }
 
 variable "volume_size" {

@@ -49,34 +49,29 @@ resource "oci_core_security_list" "SL" {
   display_name   = "${var.deployment_short_name}_SL"
   vcn_id         = "${oci_core_virtual_network.VCN.id}"
 
-  # Allow outbound tcp traffic on all ports
-  egress_security_rules = [
-    {
-      destination = "0.0.0.0/0"
-      protocol    = "6"
-    },
-  ]
 
-  ingress_security_rules = [
-    {
-      # Allow 22 from everywhere
-      source   = "0.0.0.0/0"
-      protocol = "6"
+  egress_security_rules {
+    protocol    = "all"
+    destination = "0.0.0.0/0"
+  }
 
-      tcp_options {
-        min = 22
-        max = 22
-      }
-    },
-    {
-      # Allow 27017 from the VCN only
-      source   = "${oci_core_virtual_network.VCN.cidr_block}"
-      protocol = "6"
+  ingress_security_rules {
+    protocol = "6"
+    source   = "0.0.0.0/0"
 
-      tcp_options = {
-        min = 27017
-        max = 27017
-      }
-    },
-  ]
+    tcp_options {
+      min = 22
+      max = 22
+    }
+  }
+  ingress_security_rules {
+    protocol = "6"
+    source   = "${oci_core_virtual_network.VCN.cidr_block}"
+
+    tcp_options {
+      min = 27017
+      max = 27017
+    }
+  }   
+
 }
